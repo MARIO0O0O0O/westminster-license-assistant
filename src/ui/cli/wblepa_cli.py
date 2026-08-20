@@ -2,7 +2,7 @@ import os
 import sys
 import requests
 
-PROD_API_URL = "https://wblepa-backend.onrender.com"
+PROD_API_URL = "https://westminster-license-assistant.onrender.com"
 LOCAL_API_URL = "http://127.0.0.1:8000"
 
 API_URL = os.getenv("WBLEPA_API_URL", LOCAL_API_URL)

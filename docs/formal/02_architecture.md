@@ -6,7 +6,7 @@ See `architecture_diagram.png` for the visual diagram.
 ### Layers
 
 **1. Frontend Layer**
-- Web UI (Next.js or plain HTML/JS) — questionnaire-driven interface for end users.
+- Web UI (Static HTML5/CSS3/JavaScript frontend, served via Vercel static hosting) — questionnaire-driven interface for end users.
 - CLI (Termux/Python) — for local demos, dogfooding, and development testing.
 - Both call the same backend API to ensure consistent behavior.
 

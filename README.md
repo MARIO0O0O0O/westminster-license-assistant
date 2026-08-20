@@ -7,8 +7,8 @@ An AI-powered, RAG-driven assistant designed to guide Westminster, CA business o
 ## 🌐 Public Live Links & Work Sample Demo
 
 - **Web UI Demo (Vercel)**: `https://westminster-license-assistant.vercel.app`
-- **Backend API (Render)**: `https://wblepa-backend.onrender.com`
-- **OpenAPI Interactive Documentation**: `https://wblepa-backend.onrender.com/docs`
+- **Backend API (Render)**: `https://westminster-license-assistant.onrender.com`
+- **OpenAPI Interactive Documentation**: `https://westminster-license-assistant.onrender.com/docs`
 - **Interactive Presentation Deck**: `https://westminster-license-assistant.vercel.app/deck.html`
 - **Interactive 3D Architecture Mind Map**: `https://westminster-license-assistant.vercel.app/mindmap.html`
 - **GitHub Repository**: `https://github.com/MARIO0O0O0O/westminster-license-assistant`
