@@ -29,12 +29,6 @@ INSERT OR REPLACE INTO chunks (id, source_url, section_heading, chunk_text, topi
 VALUES (?, ?, ?, ?, ?, ?);
 """
 
-UPSERT_FTS_SQL = """
-INSERT OR REPLACE INTO chunks_fts (rowid, id, source_url, section_heading, chunk_text, topic_tags)
-SELECT rowid, id, source_url, section_heading, chunk_text, topic_tags
-FROM chunks WHERE id = ?;
-"""
-
 def init_db(db_path: str = DB_PATH):
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     with sqlite3.connect(db_path) as conn:
@@ -47,6 +41,13 @@ def load_chunks_to_db(chunks: list, db_path: str = DB_PATH) -> int:
     inserted_count = 0
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
+        
+        # Purge existing chunks for source_urls in the incoming batch to prevent orphan chunks
+        source_urls = list(set(c["source_url"] for c in chunks))
+        for url in source_urls:
+            cursor.execute("DELETE FROM chunks WHERE source_url = ?", (url,))
+            cursor.execute("DELETE FROM chunks_fts WHERE source_url = ?", (url,))
+
         for chunk in chunks:
             cursor.execute(
                 UPSERT_CHUNK_SQL,
@@ -58,10 +59,6 @@ def load_chunks_to_db(chunks: list, db_path: str = DB_PATH) -> int:
                     chunk.get("topic_tags", ""),
                     chunk["scrape_date"]
                 )
-            )
-            # Sync FTS table
-            cursor.execute(
-                "DELETE FROM chunks_fts WHERE id = ?", (chunk["id"],)
             )
             cursor.execute(
                 "INSERT INTO chunks_fts (id, source_url, section_heading, chunk_text, topic_tags) VALUES (?, ?, ?, ?, ?)",
