@@ -1,2 +1,8 @@
 [2026-08-19T21:58:43.441986] /eligibility | question: "I run a business from my home in Westminster, what permits do I need?" | cited: ['chk_westminster_faq_001', 'chk_westminster_faq_002', 'chk_westminster_faq_003'] | status: SUCCESS
 [2026-08-19T21:59:20.720084] /eligibility | question: "Do out-of-city contractors need a license in Westminster?" | cited: ['chk_westminster_faq_001', 'chk_westminster_faq_002', 'chk_westminster_faq_003'] | status: SUCCESS
+[2026-08-19T22:02:25.822785] /eligibility | question: "Do I need a license if I lease out property I own?" | cited: ['chk_westminster_faq_001', 'chk_westminster_faq_003', 'chk_westminster_faq_004'] | status: SUCCESS
+[2026-08-19T22:02:25.832128] /eligibility | question: "Do I need a license if I lease out property I own?" | cited: ['chk_westminster_faq_001', 'chk_westminster_faq_003', 'chk_westminster_faq_004'] | status: SUCCESS
+[2026-08-19T22:02:25.836779] /eligibility | question: "I run a business from my home, what do I need?" | cited: ['chk_westminster_faq_001', 'chk_westminster_faq_002', 'chk_westminster_faq_003'] | status: SUCCESS
+[2026-08-19T22:02:25.841021] /eligibility | question: "I run a business from my home, what do I need?" | cited: ['chk_westminster_faq_001', 'chk_westminster_faq_002', 'chk_westminster_faq_003'] | status: SUCCESS
+[2026-08-19T22:02:25.844832] /eligibility | question: "How do I renew my business license online?" | cited: ['chk_hdl_portal_home_001', 'chk_hdl_renewal_001', 'chk_hdl_renewal_003'] | status: SUCCESS
+[2026-08-19T22:02:25.848691] /eligibility | question: "How do I renew my business license online?" | cited: ['chk_hdl_portal_home_001', 'chk_hdl_renewal_001', 'chk_hdl_renewal_003'] | status: SUCCESS

@@ -1,0 +1,9 @@
+{
+  "name": "westminster-license-assistant-ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web UI for Westminster Business License Eligibility & Pathway Assistant",
+  "scripts": {
+    "dev": "npx serve -l 3000 ."
+  }
+}

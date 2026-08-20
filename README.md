@@ -12,7 +12,7 @@ Westminster's licensing process is spread across multiple systems (City website,
 - [x] **Phase 2**: RAG Retrieval & Prompt Design
 - [x] **Phase 3**: Core Logic & Questionnaire Engine
 - [x] **Phase 4**: Backend API
-- [ ] **Phase 5**: Web & CLI Interfaces
+- [x] **Phase 5**: Web & CLI Interfaces
 - [ ] **Phase 6**: Scenario Validation & Testing
 - [ ] **Phase 7**: Deployment & Monitoring
 - [ ] **Phase 8**: Final Handoff & Maintenance
