@@ -1,0 +1,36 @@
+[2026-08-19T21:48:46.279761] Attempt 1 failed for https://www.westminster-ca.gov/departments/community-development/planning-building/business-license-faq with status 403
+[2026-08-19T21:48:47.478918] Attempt 2 failed for https://www.westminster-ca.gov/departments/community-development/planning-building/business-license-faq with status 403
+[2026-08-19T21:48:47.479887] Loaded fallback snapshot for westminster_faq from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_faq.html
+[2026-08-19T21:48:47.675960] Attempt 1 failed for https://www.westminster-ca.gov/services/business-licenses with status 403
+[2026-08-19T21:48:48.881124] Attempt 2 failed for https://www.westminster-ca.gov/services/business-licenses with status 403
+[2026-08-19T21:48:48.882468] Loaded fallback snapshot for westminster_service_directory from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_service_directory.html
+[2026-08-19T21:48:49.057870] Attempt 1 failed for https://www.westminster-ca.gov/business/apply-for/business-license with status 403
+[2026-08-19T21:48:50.468412] Attempt 2 failed for https://www.westminster-ca.gov/business/apply-for/business-license with status 403
+[2026-08-19T21:48:50.469700] Loaded fallback snapshot for westminster_apply from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_apply.html
+[2026-08-19T21:48:50.628958] Attempt 1 failed for https://www.westminster-ca.gov/departments/police/code-enforcement with status 403
+[2026-08-19T21:48:51.824660] Attempt 2 failed for https://www.westminster-ca.gov/departments/police/code-enforcement with status 403
+[2026-08-19T21:48:51.826048] Loaded fallback snapshot for westminster_code_enforcement from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_code_enforcement.html
+[2026-08-19T21:48:52.014555] Attempt 1 failed for https://westminster.hdlgov.com/ with status 403
+[2026-08-19T21:48:53.219937] Attempt 2 failed for https://westminster.hdlgov.com/ with status 403
+[2026-08-19T21:48:53.221625] Loaded fallback snapshot for hdl_portal_home from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_hdl_portal_home.html
+[2026-08-19T21:48:53.351865] Attempt 1 failed for https://westminster.hdlgov.com/Renew with status 403
+[2026-08-19T21:48:54.542040] Attempt 2 failed for https://westminster.hdlgov.com/Renew with status 403
+[2026-08-19T21:48:54.542761] Loaded fallback snapshot for hdl_renewal from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_hdl_renewal.html
+[2026-08-19T21:49:04.032355] Attempt 1 failed for https://www.westminster-ca.gov/departments/community-development/planning-building/business-license-faq with status 403
+[2026-08-19T21:49:05.285602] Attempt 2 failed for https://www.westminster-ca.gov/departments/community-development/planning-building/business-license-faq with status 403
+[2026-08-19T21:49:05.286463] Loaded fallback snapshot for westminster_faq from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_faq.html
+[2026-08-19T21:49:05.483144] Attempt 1 failed for https://www.westminster-ca.gov/services/business-licenses with status 403
+[2026-08-19T21:49:06.737678] Attempt 2 failed for https://www.westminster-ca.gov/services/business-licenses with status 403
+[2026-08-19T21:49:06.739375] Loaded fallback snapshot for westminster_service_directory from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_service_directory.html
+[2026-08-19T21:49:06.931650] Attempt 1 failed for https://www.westminster-ca.gov/business/apply-for/business-license with status 403
+[2026-08-19T21:49:08.109855] Attempt 2 failed for https://www.westminster-ca.gov/business/apply-for/business-license with status 403
+[2026-08-19T21:49:08.110394] Loaded fallback snapshot for westminster_apply from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_apply.html
+[2026-08-19T21:49:08.279166] Attempt 1 failed for https://www.westminster-ca.gov/departments/police/code-enforcement with status 403
+[2026-08-19T21:49:09.562177] Attempt 2 failed for https://www.westminster-ca.gov/departments/police/code-enforcement with status 403
+[2026-08-19T21:49:09.563508] Loaded fallback snapshot for westminster_code_enforcement from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_westminster_code_enforcement.html
+[2026-08-19T21:49:09.878941] Attempt 1 failed for https://westminster.hdlgov.com/ with status 403
+[2026-08-19T21:49:11.063184] Attempt 2 failed for https://westminster.hdlgov.com/ with status 403
+[2026-08-19T21:49:11.064600] Loaded fallback snapshot for hdl_portal_home from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_hdl_portal_home.html
+[2026-08-19T21:49:11.223156] Attempt 1 failed for https://westminster.hdlgov.com/Renew with status 403
+[2026-08-19T21:49:12.392289] Attempt 2 failed for https://westminster.hdlgov.com/Renew with status 403
+[2026-08-19T21:49:12.393087] Loaded fallback snapshot for hdl_renewal from /data/data/com.termux/files/home/projects/westminster-license-assistant/data/raw/20260820_hdl_renewal.html
