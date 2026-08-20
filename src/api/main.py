@@ -2,10 +2,15 @@ import os
 import sys
 import sqlite3
 from datetime import datetime
+
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 if PROJECT_ROOT not in sys.path:
@@ -18,18 +23,41 @@ DB_PATH = os.path.join(PROJECT_ROOT, "data", "corpus.db")
 LOG_DIR = os.path.join(PROJECT_ROOT, "logs")
 REQUEST_LOG_PATH = os.path.join(LOG_DIR, "api_requests.log")
 
+ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://westminster-license-assistant.vercel.app"
+]
+
+limiter = Limiter(key_func=get_remote_address, default_limits=["60/minute"])
+
 app = FastAPI(
     title="Westminster Business License Assistant (WBLEPA) API",
     description="Backend HTTP API providing RAG-powered guidance and official source checklists for Westminster business licensing.",
     version="1.0.0"
 )
 
-# Enable CORS for frontend integration
+app.state.limiter = limiter
+
+async def custom_rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    log_api_request(request.url.path, "RATE_LIMITED", [], False, "429 Rate Limit Exceeded")
+    return JSONResponse(
+        status_code=429,
+        content={
+            "success": False,
+            "error": "Rate limit exceeded (15 requests/minute). Please wait before making additional requests."
+        }
+    )
+
+app.add_exception_handler(RateLimitExceeded, custom_rate_limit_handler)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -37,7 +65,7 @@ def log_api_request(endpoint: str, question: str, cited_ids: list, success: bool
     os.makedirs(LOG_DIR, exist_ok=True)
     timestamp = datetime.now().isoformat()
     status_str = "SUCCESS" if success else f"ERROR: {error_msg}"
-    log_line = f"[{timestamp}] {endpoint} | question: \"{question}\" | cited: {cited_ids} | status: {status_str}\n"
+    log_line = f"[{timestamp}] {endpoint} | question: \"{question[:100]}\" | cited: {cited_ids} | status: {status_str}\n"
     with open(REQUEST_LOG_PATH, "a", encoding="utf-8") as f:
         f.write(log_line)
 
@@ -86,7 +114,8 @@ async def health_check():
     }
 
 @app.post("/eligibility", summary="Determine Business License Eligibility & Pathways")
-async def post_eligibility(req: EligibilityRequest):
+@limiter.limit("15/minute")
+async def post_eligibility(request: Request, req: EligibilityRequest):
     try:
         result = answer_question(req.question)
         cited_ids = result.get("cited_chunk_ids", [])
