@@ -9,7 +9,19 @@ An AI-powered, RAG-driven assistant designed to guide Westminster, CA business o
 - **Web UI Demo (Vercel)**: `https://westminster-license-assistant.vercel.app`
 - **Backend API (Render)**: `https://wblepa-backend.onrender.com`
 - **OpenAPI Interactive Documentation**: `https://wblepa-backend.onrender.com/docs`
+- **Interactive Presentation Deck**: `https://westminster-license-assistant.vercel.app/deck.html`
+- **Interactive 3D Architecture Mind Map**: `https://westminster-license-assistant.vercel.app/mindmap.html`
 - **GitHub Repository**: `https://github.com/MARIO0O0O0O/westminster-license-assistant`
+
+---
+
+## 📄 Final Deliverables Package
+
+The full formal report, executive presentation slide deck, and interactive 3D architecture mind map for the City of Westminster are included in the repository:
+
+1. **Formal Executive Report**: [`docs/final_package/final_report.md`](docs/final_package/final_report.md)
+2. **Interactive Presentation Slide Deck**: [`docs/final_package/slide_deck.html`](docs/final_package/slide_deck.html)
+3. **Interactive 3D Architecture Mind Map**: [`docs/final_package/mindmap_3d.html`](docs/final_package/mindmap_3d.html)
 
 ---
 
@@ -61,7 +73,7 @@ View API docs at `http://127.0.0.1:8000/docs`.
 ### 4. Run CLI Interface
 In a separate terminal window:
 ```bash
-python3 src.ui.cli.wblepa_cli.py
+python3 src/ui/cli/wblepa_cli.py
 ```
 
 ### 5. Run Web UI
@@ -83,4 +95,4 @@ Open `http://localhost:3000` in your web browser.
 - [x] **Phase 5**: Web & CLI Interfaces
 - [x] **Phase 6**: Scenario Validation & Testing
 - [x] **Phase 7**: Deployment & Monitoring
-- [ ] **Phase 8**: Final Handoff & Maintenance (Optional / Post-Launch)
+- [x] **Phase 8**: Final Package for City of Westminster (`v1.0-final`)
