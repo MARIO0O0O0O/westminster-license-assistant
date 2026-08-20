@@ -1,4 +1,4 @@
-const API_URL = window.WBLEPA_API_URL || "http://127.0.0.1:8000";
+const API_URL = window.WBLEPA_API_URL || "https://westminster-license-assistant.onrender.com";
 
 function switchTab(tabName) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
