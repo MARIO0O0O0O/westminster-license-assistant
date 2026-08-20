@@ -13,6 +13,15 @@ CREATE TABLE IF NOT EXISTS chunks (
     topic_tags TEXT,
     scrape_date TEXT NOT NULL
 );
+
+CREATE VIRTUAL TABLE IF NOT EXISTS chunks_fts USING fts5(
+    id UNINDEXED,
+    source_url UNINDEXED,
+    section_heading,
+    chunk_text,
+    topic_tags,
+    tokenize='porter unicode61'
+);
 """
 
 UPSERT_CHUNK_SQL = """
@@ -20,11 +29,17 @@ INSERT OR REPLACE INTO chunks (id, source_url, section_heading, chunk_text, topi
 VALUES (?, ?, ?, ?, ?, ?);
 """
 
+UPSERT_FTS_SQL = """
+INSERT OR REPLACE INTO chunks_fts (rowid, id, source_url, section_heading, chunk_text, topic_tags)
+SELECT rowid, id, source_url, section_heading, chunk_text, topic_tags
+FROM chunks WHERE id = ?;
+"""
+
 def init_db(db_path: str = DB_PATH):
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute(CREATE_TABLE_SQL)
+        cursor.executescript(CREATE_TABLE_SQL)
         conn.commit()
 
 def load_chunks_to_db(chunks: list, db_path: str = DB_PATH) -> int:
@@ -42,6 +57,20 @@ def load_chunks_to_db(chunks: list, db_path: str = DB_PATH) -> int:
                     chunk["chunk_text"],
                     chunk.get("topic_tags", ""),
                     chunk["scrape_date"]
+                )
+            )
+            # Sync FTS table
+            cursor.execute(
+                "DELETE FROM chunks_fts WHERE id = ?", (chunk["id"],)
+            )
+            cursor.execute(
+                "INSERT INTO chunks_fts (id, source_url, section_heading, chunk_text, topic_tags) VALUES (?, ?, ?, ?, ?)",
+                (
+                    chunk["id"],
+                    chunk["source_url"],
+                    chunk.get("section_heading", ""),
+                    chunk["chunk_text"],
+                    chunk.get("topic_tags", "")
                 )
             )
             inserted_count += 1

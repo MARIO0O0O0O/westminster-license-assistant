@@ -29,3 +29,9 @@ This document lists the locked public source URLs to be scraped and indexed for 
 7. **CalGold Permit Assistance Tool Main Page**
    - URL: `https://www.calgold.ca.gov/`
    - Content: California state permit lookup tool for Westminster-specific business types.
+
+---
+
+## 📝 Changelog & URL Verification Log
+
+- **2026-08-20 (Phase 2 Verification)**: Verified all 7 source URLs. Confirmed city pages (`/services/business-licenses`, `/business/apply-for/business-license`, `/departments/community-development/planning-building/business-license-faq`) and HdL portal endpoints (`westminster.hdlgov.com`, `westminster.hdlgov.com/Renew`) match expected site endpoints. Local HTML snapshots (`data/raw/`) mapped and indexed into SQLite database with FTS5 search table.
