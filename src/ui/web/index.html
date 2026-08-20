@@ -8,48 +8,57 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <header id="app-header">
             <span class="badge">City of Westminster Public Guidance Proof-of-Concept</span>
             <h1>Business License Eligibility & Pathway Assistant</h1>
             <p class="subtitle">AI-assisted guidance for business owners, landlords, and contractors in Westminster, CA</p>
 
             <div class="disclaimer-banner">
-                <strong>Disclaimer:</strong> This tool provides unofficial informational guidance derived from public City of Westminster, HdL, and CalGold documentation. It does not constitute binding legal or municipal determinations.
+                <strong>Disclaimer:</strong> Unofficial informational guidance derived from public Westminster, HdL, and CalGold documentation. Not a binding municipal determination.
             </div>
         </header>
 
         <!-- Persona Cards -->
-        <div class="personas-grid">
+        <div id="personas-container" class="personas-grid">
             <div class="persona-card" onclick="selectPersona('home-business')">
                 <h3>🏡 Home-Based Business</h3>
-                <p>Operating a home business or occupation in a residential zone.</p>
+                <p>Operating a business from a residential zone.</p>
             </div>
             <div class="persona-card" onclick="selectPersona('landlord')">
-                <h3>🏢 Landlord / Property Owner</h3>
-                <p>Leasing 3+ residential units or commercial property to tenants.</p>
+                <h3>🏢 Landlord / Owner</h3>
+                <p>Leasing 3+ residential units or commercial spaces.</p>
             </div>
             <div class="persona-card" onclick="selectPersona('contractor')">
                 <h3>🛠️ Contractor</h3>
-                <p>In-city or out-of-city contractors pulling permits in Westminster.</p>
+                <p>In-city or out-of-city contracting operations.</p>
             </div>
         </div>
 
         <!-- Tab Navigation -->
         <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('assistant')">🤖 AI Assistant</button>
-            <button class="tab-btn" onclick="switchTab('checklist')">📋 Browse Checklist</button>
-            <button class="tab-btn" onclick="switchTab('sources')">🌐 Source Directory</button>
+            <button class="tab-btn active" onclick="switchTab('assistant', event)">🤖 AI Chat Assistant</button>
+            <button class="tab-btn" onclick="switchTab('checklist', event)">📋 Browse Checklist</button>
+            <button class="tab-btn" onclick="switchTab('sources', event)">🌐 Source Directory</button>
         </div>
 
-        <!-- Tab 1: AI Assistant -->
+        <!-- Tab 1: AI Assistant (Chat View) -->
         <div id="tab-assistant" class="tab-content active">
-            <div class="input-group">
-                <label for="question-input">Ask a Business Licensing Question:</label>
-                <textarea id="question-input" rows="3" placeholder="e.g. Do I need a license if I lease out property I own?"></textarea>
-            </div>
-            <button class="submit-btn" onclick="submitQuestion()">Check Eligibility & Requirements</button>
+            <div class="chat-container">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="empty-state" id="empty-state">
+                        <div class="empty-state-icon">💬</div>
+                        <p><strong>Ask a business licensing question to get started</strong></p>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">
+                            Or tap one of the quick-select categories above.
+                        </p>
+                    </div>
+                </div>
 
-            <div id="assistant-results" style="display:none;"></div>
+                <div class="chat-input-wrapper">
+                    <textarea id="question-input" rows="2" placeholder="Ask a business licensing question..." onkeydown="handleKeyDown(event)"></textarea>
+                    <button id="send-btn" class="send-btn" onclick="submitQuestion()">Send ➔</button>
+                </div>
+            </div>
         </div>
 
         <!-- Tab 2: Checklist Browse -->
