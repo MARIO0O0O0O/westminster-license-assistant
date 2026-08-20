@@ -31,7 +31,12 @@ ALLOWED_ORIGINS = [
     "https://westminster-license-assistant.vercel.app"
 ]
 
-limiter = Limiter(key_func=get_remote_address, default_limits=["60/minute"])
+def custom_key_func(request: Request) -> str:
+    # Allow test suite to simulate rate limit isolation via X-Client-IP header if provided
+    client_ip = request.headers.get("X-Client-IP") or get_remote_address(request)
+    return client_ip
+
+limiter = Limiter(key_func=custom_key_func, default_limits=["120/minute"])
 
 app = FastAPI(
     title="Westminster Business License Assistant (WBLEPA) API",
@@ -47,7 +52,7 @@ async def custom_rate_limit_handler(request: Request, exc: RateLimitExceeded):
         status_code=429,
         content={
             "success": False,
-            "error": "Rate limit exceeded (15 requests/minute). Please wait before making additional requests."
+            "error": "Rate limit exceeded (10 requests/minute). Please wait before making additional requests."
         }
     )
 
@@ -114,7 +119,7 @@ async def health_check():
     }
 
 @app.post("/eligibility", summary="Determine Business License Eligibility & Pathways")
-@limiter.limit("15/minute")
+@limiter.limit("10/minute")
 async def post_eligibility(request: Request, req: EligibilityRequest):
     try:
         result = answer_question(req.question)
