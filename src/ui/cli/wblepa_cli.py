@@ -2,11 +2,16 @@ import os
 import sys
 import requests
 
-API_URL = os.getenv("WBLEPA_API_URL", "http://127.0.0.1:8000")
+PROD_API_URL = "https://wblepa-backend.onrender.com"
+LOCAL_API_URL = "http://127.0.0.1:8000"
+
+API_URL = os.getenv("WBLEPA_API_URL", LOCAL_API_URL)
 
 def print_banner():
+    mode_label = "PRODUCTION (Render)" if "onrender.com" in API_URL else "LOCAL (Termux)"
     print("\n" + "="*65)
     print("🏛️  WESTMINSTER BUSINESS LICENSE ELIGIBILITY ASSISTANT (WBLEPA)")
+    print(f"   Mode: [{mode_label}] | API Endpoint: {API_URL}")
     print("   Unofficial Informational Guide for City & State Permits")
     print("="*65 + "\n")
 
@@ -22,7 +27,7 @@ def ask_question_cli():
         res = requests.post(
             f"{API_URL}/eligibility",
             json={"question": question},
-            timeout=10
+            timeout=15
         )
         if res.status_code == 200:
             data = res.json().get("data", {})
@@ -70,7 +75,7 @@ def browse_topic_cli():
 
     print(f"\n⏳ Fetching checklist for topic: {selected_topic}...")
     try:
-        res = requests.get(f"{API_URL}/checklist?topic={selected_topic}", timeout=10)
+        res = requests.get(f"{API_URL}/checklist?topic={selected_topic}", timeout=15)
         if res.status_code == 200:
             items = res.json().get("data", {}).get("items", [])
             print(f"\n📋 CHECKLIST ({len(items)} Items Found):\n")
@@ -87,7 +92,7 @@ def browse_topic_cli():
 def view_sources_cli():
     print("\n--- 🌐 LOCKED PUBLIC SOURCE URLS ---")
     try:
-        res = requests.get(f"{API_URL}/sources", timeout=10)
+        res = requests.get(f"{API_URL}/sources", timeout=15)
         if res.status_code == 200:
             sources = res.json().get("data", {}).get("sources", [])
             print(f"Found {len(sources)} verified public sources:\n")
@@ -100,6 +105,15 @@ def view_sources_cli():
     except Exception as e:
         print(f"❌ Connection error: {e}")
 
+def toggle_endpoint_cli():
+    global API_URL
+    if API_URL == LOCAL_API_URL:
+        API_URL = PROD_API_URL
+        print(f"\n🔄 Switched API endpoint to PRODUCTION: {PROD_API_URL}\n")
+    else:
+        API_URL = LOCAL_API_URL
+        print(f"\n🔄 Switched API endpoint to LOCAL: {LOCAL_API_URL}\n")
+
 def main():
     print_banner()
     while True:
@@ -107,20 +121,23 @@ def main():
         print("  1) ❓ Ask an Eligibility Question")
         print("  2) 📂 Browse Checklist by Topic")
         print("  3) 🌐 View Locked Source URLs")
-        print("  4) 🚪 Exit")
+        print("  4) ⚙️ Toggle API Endpoint (Local vs Prod)")
+        print("  5) 🚪 Exit")
         
-        choice = input("\nSelect option (1-4): ").strip()
+        choice = input("\nSelect option (1-5): ").strip()
         if choice == "1":
             ask_question_cli()
         elif choice == "2":
             browse_topic_cli()
         elif choice == "3":
             view_sources_cli()
-        elif choice == "4" or choice.lower() in ["exit", "q", "quit"]:
+        elif choice == "4":
+            toggle_endpoint_cli()
+        elif choice in ["5", "exit", "q", "quit"]:
             print("\nThank you for using the Westminster Business License Assistant. Goodbye! 👋\n")
             break
         else:
-            print("⚠️ Invalid choice. Please select 1, 2, 3, or 4.\n")
+            print("⚠️ Invalid choice. Please select 1, 2, 3, 4, or 5.\n")
 
 if __name__ == "__main__":
     main()
